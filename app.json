@@ -1,15 +1,22 @@
 {
   "expo": {
-    "name": "better-creating-ai",
-    "slug": "better-creating-ai",
+    "name": "Nirvan",
+    "slug": "nirvan-ai-coach-v2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "bettercreatingai",
+    "scheme": "nirvan",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ramkumar.gudivada.nirvanaicoachv2",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -43,6 +50,11 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "349c51cb-4d92-43f3-801d-0fec685ff377"
+      }
     }
   }
 }

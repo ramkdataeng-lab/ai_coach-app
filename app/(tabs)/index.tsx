@@ -1,98 +1,225 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import React, { useEffect } from 'react';
+import { StyleSheet, ScrollView, TouchableOpacity, View, Alert } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { CoachCard } from '@/components/coach-card';
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Sparkles, Activity, BrainCircuit, Plus, Trash2 } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { router, useFocusEffect } from 'expo-router';
+import { PersistenceService } from '@/utils/persistence';
+import { CoachIcon } from '@/components/coach-icon';
+import { AppHeader } from '@/components/app-header';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { RectButton } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const colorScheme = 'light'; // Forced light mode
+  const [userName, setUserName] = React.useState('Guest');
+  const [customCoaches, setCustomCoaches] = React.useState<any[]>([]);
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  // Check for context and load coaches on every focus
+  const loadData = async () => {
+    // User Context
+    const context = await PersistenceService.getUserContext();
+    if (!context) {
+      setTimeout(() => {
+        router.replace('/context');
+      }, 100);
+    } else if (context.name) {
+      setUserName(context.name);
+    }
+
+    // Load Custom Coaches
+    const customs = await PersistenceService.getCustomCoaches();
+    setCustomCoaches(customs.map(c => ({
+      id: c.id,
+      name: c.text,
+      description: c.subtitle,
+      icon: <CoachIcon name={c.icon || 'Sparkles'} size={24} color={Colors.light.tint} />
+    })));
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      loadData();
+    }, [])
+  );
+
+  const handleDeleteCoach = (id: string, name: string) => {
+    Alert.alert(
+      "Delete Coach",
+      `Are you sure you want to delete "${name}"?`,
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: async () => {
+            // Optimistic Update
+            setCustomCoaches(prev => prev.filter(c => c.id !== id));
+            await PersistenceService.deleteCustomCoach(id);
+            // loadData(); // No need to reload if state is updated
+          }
+        }
+      ]
+    );
+  };
+
+  const renderRightActions = (id: string, name: string) => {
+    return (
+      <View style={{ width: 80, marginBottom: 12, marginLeft: 12 }}>
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={() => handleDeleteCoach(id, name)}
+          activeOpacity={0.6}
+        >
+          <Trash2 size={24} color="#ef4444" />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const defaultCoaches = [
+    {
+      id: '1',
+      name: 'Productivity Pro',
+      description: 'Master your workflow and get things done.',
+      icon: <Activity size={24} color={Colors.light.tint} />,
+    },
+    {
+      id: '2',
+      name: 'Creative Spark',
+      description: 'Unlock your creative potential with minimalist ideas.',
+      icon: <Sparkles size={24} color={Colors.light.tint} />,
+    },
+    {
+      id: '3',
+      name: 'Systems Thinker',
+      description: 'Architect your life with interconnected systems.',
+      icon: <BrainCircuit size={24} color={Colors.light.tint} />,
+    },
+  ];
+
+  return (
+    <ThemedView style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <AppHeader style={{ marginBottom: 32 }}>
+            <View>
+              <ThemedText style={styles.greeting} type="subtitle">Good Morning,</ThemedText>
+              <ThemedText style={styles.username} type="title">{userName}</ThemedText>
+            </View>
+          </AppHeader>
+
+          {customCoaches.length > 0 && (
+            <>
+              <ThemedView style={styles.sectionHeader}>
+                <ThemedText type="defaultSemiBold">My Custom Coaches</ThemedText>
+              </ThemedView>
+
+              {customCoaches.map((coach) => (
+                <Swipeable
+                  key={coach.id}
+                  renderRightActions={() => renderRightActions(coach.id, coach.name)}
+                >
+                  <CoachCard
+                    id={coach.id}
+                    name={coach.name}
+                    description={coach.description}
+                    icon={coach.icon}
+                    onPress={() => router.push({ pathname: '/chat/[id]', params: { id: coach.id, name: coach.name } })}
+                  />
+                </Swipeable>
+              ))}
+              <View style={{ height: 24 }} />
+            </>
+          )}
+
+          <ThemedView style={styles.sectionHeader}>
+            <ThemedText type="defaultSemiBold">Featured Coaches</ThemedText>
+          </ThemedView>
+
+          {defaultCoaches.map((coach) => (
+            <CoachCard
+              key={coach.id}
+              id={coach.id}
+              name={coach.name}
+              description={coach.description}
+              icon={coach.icon}
+              onPress={() => router.push({ pathname: '/chat/[id]', params: { id: coach.id, name: coach.name } })}
+            />
+          ))}
+
+
+        </ScrollView>
+
+        {/* Floating Action Button */}
+        <TouchableOpacity
+          style={styles.fab}
+          onPress={() => router.push('/create-coach')}
+        >
+          <Plus size={32} color="#fff" />
+        </TouchableOpacity>
+
+      </SafeAreaView>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  safeArea: {
+    flex: 1,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  scrollContent: {
+    padding: 24,
+    paddingBottom: 100, // Space for FAB
+  },
+  header: {
+    marginBottom: 32,
+    backgroundColor: 'transparent',
+  },
+  greeting: {
+    opacity: 0.6,
+    marginBottom: 4,
+  },
+  username: {
+    fontSize: 32,
+    fontFamily: 'Outfit_700Bold',
+  },
+  sectionHeader: {
+    marginBottom: 16,
+    backgroundColor: 'transparent',
+    fontFamily: 'Outfit_600SemiBold',
+  },
+
+  fab: {
     position: 'absolute',
+    bottom: 24,
+    right: 24,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: Colors.light.tint,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 100,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
   },
+  deleteButton: {
+    flex: 1,
+    backgroundColor: '#fee2e2',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16,
+  }
 });

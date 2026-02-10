@@ -1,0 +1,36 @@
+
+name: Build iOS App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: 🏗 Setup repository
+        uses: actions/checkout@v4
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: npm
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🚀 Build iOS App
+        run: eas build --platform ios --profile production --local --non-interactive --output build.ipa
+
+      - name: 📤 Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: build.ipa
