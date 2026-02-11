@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Nirvan AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFD700;
+            --bg-dark: #020617;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to bottom right, #fff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-top: 2.5rem;
+            font-size: 1.5rem;
+        }
+
+        section {
+            background: var(--bg-glass);
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        p,
+        li {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="home-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6" />
+            </svg>
+            Back to Hub
+        </a>
+
+        <h1>Privacy Policy</h1>
+        <p>Last Updated: February 11, 2026</p>
+
+        <section>
+            <h2>1. Introduction</h2>
+            <p>Nirvan AI ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains
+                how your information is collected, used, and safeguarded when you use our mobile application and related
+                services.</p>
+        </section>
+
+        <section>
+            <h2>2. Data Collection & Privacy-First Policy</h2>
+            <p><strong>Local-First Storage:</strong> At Nirvan AI, we believe your personal growth is private. Most
+                data, including your chat history and personal context, is stored locally on your device only.</p>
+            <ul>
+                <li><strong>Chat History:</strong> Stored locally via AsyncStorage. We do not store your conversations
+                    on our servers.</li>
+                <li><strong>Personal Context:</strong> Any values or goals you set are stored on-device.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. Third-Party Services</h2>
+            <p>To provide our AI coaching services, we utilize the following trusted partners:</p>
+            <ul>
+                <li><strong>OpenAI:</strong> Your messages are sent to OpenAI (GPT-4) to generate coaching responses.
+                    This data is subject to OpenAI's privacy policies and is not used to train their models for other
+                    users.</li>
+                <li><strong>RevenueCat:</strong> We use RevenueCat to manage subscriptions and ensure secure payment
+                    processing via the Apple App Store. No personal chat data is shared with RevenueCat.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>4. Security</h2>
+            <p>We implement industry-standard security measures to protect your data, including HTTPS encryption for all
+                API communication and local data isolation.</p>
+        </section>
+
+        <section>
+            <h2>5. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at:
+                <strong>ramkumar.gudivada@gmail.com</strong>
+            </p>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2026 Nirvan AI. Built for Privacy and Growth.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
