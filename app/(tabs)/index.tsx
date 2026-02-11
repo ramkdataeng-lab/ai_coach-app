@@ -6,7 +6,7 @@ import { ThemedView } from '@/components/themed-view';
 import { CoachCard } from '@/components/coach-card';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { Sparkles, Activity, BrainCircuit, Plus, Trash2 } from 'lucide-react-native';
+import { Sparkles, Activity, BrainCircuit, Plus, Trash2, Dumbbell, Briefcase, Brain, Heart, DollarSign } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useFocusEffect } from 'expo-router';
 import { PersistenceService } from '@/utils/persistence';
@@ -85,21 +85,39 @@ export default function HomeScreen() {
   const defaultCoaches = [
     {
       id: '1',
-      name: 'Productivity Pro',
-      description: 'Master your workflow and get things done.',
-      icon: <Activity size={24} color={Colors.light.tint} />,
+      name: 'Fitness Coach',
+      description: 'Personalized workout plans, nutrition guidance, and progress tracking.',
+      icon: <Dumbbell size={24} color={Colors.light.tint} />,
     },
     {
       id: '2',
-      name: 'Creative Spark',
-      description: 'Unlock your creative potential with minimalist ideas.',
-      icon: <Sparkles size={24} color={Colors.light.tint} />,
+      name: 'Career Coach',
+      description: 'Resume optimization, interview prep, and professional development.',
+      icon: <Briefcase size={24} color={Colors.light.tint} />,
     },
     {
       id: '3',
-      name: 'Systems Thinker',
-      description: 'Architect your life with interconnected systems.',
-      icon: <BrainCircuit size={24} color={Colors.light.tint} />,
+      name: 'Mindfulness Coach',
+      description: 'Stress management, meditation techniques, and mental wellness.',
+      icon: <Brain size={24} color={Colors.light.tint} />,
+    },
+    {
+      id: '4',
+      name: 'Relationship Coach',
+      description: 'Communication skills, conflict resolution, and healthy relationships.',
+      icon: <Heart size={24} color={Colors.light.tint} />,
+    },
+    {
+      id: '5',
+      name: 'Finance Coach',
+      description: 'Budgeting strategies, investment advice, and financial goal setting.',
+      icon: <DollarSign size={24} color={Colors.light.tint} />,
+    },
+    {
+      id: '6',
+      name: 'Productivity Coach',
+      description: 'Time management, goal setting, habit formation, and workflow optimization.',
+      icon: <Activity size={24} color={Colors.light.tint} />,
     },
   ];
 

@@ -6,7 +6,7 @@ import { CoachCard } from '@/components/coach-card';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Search, TrendingUp, Sparkles, Heart, BookOpen, Dumbbell, Code, Palette, Target, Users } from 'lucide-react-native';
+import { Search, TrendingUp, Sparkles, Heart, BookOpen, Dumbbell, Code, Palette, Target, Users, Briefcase, Brain, DollarSign, Activity } from 'lucide-react-native';
 import { router } from 'expo-router';
 
 export default function ExploreScreen() {
@@ -26,49 +26,58 @@ export default function ExploreScreen() {
 
   const featuredCoaches = [
     {
-      id: 'minimalist-chef',
-      name: 'Minimalist Chef',
-      description: 'Simple recipes with 5 ingredients or less',
-      icon: <Sparkles size={24} color={Colors.light.tint} />,
-      creator: 'Sarah K.',
-      uses: '2.3k',
-      rating: 4.8,
-    },
-    {
-      id: 'study-buddy',
-      name: 'Study Buddy',
-      description: 'Master any subject with proven learning techniques',
-      icon: <BookOpen size={24} color={Colors.light.tint} />,
-      creator: 'Alex M.',
-      uses: '5.1k',
+      id: '1',
+      name: 'Fitness Coach',
+      description: 'Personalized workout plans, nutrition guidance, and progress tracking.',
+      icon: <Dumbbell size={24} color={Colors.light.tint} />,
+      creator: 'Nirvan Team',
+      uses: '12.5k',
       rating: 4.9,
     },
     {
-      id: 'fitness-tracker',
-      name: 'Fitness Coach',
-      description: 'Personalized workout plans and nutrition advice',
-      icon: <Dumbbell size={24} color={Colors.light.tint} />,
-      creator: 'Mike R.',
-      uses: '3.7k',
-      rating: 4.7,
+      id: '2',
+      name: 'Career Coach',
+      description: 'Resume optimization, interview prep, and professional development.',
+      icon: <Briefcase size={24} color={Colors.light.tint} />,
+      creator: 'Nirvan Team',
+      uses: '10.2k',
+      rating: 4.8,
     },
     {
-      id: 'code-mentor',
-      name: 'Code Mentor',
-      description: 'Learn programming concepts and debug code',
-      icon: <Code size={24} color={Colors.light.tint} />,
-      creator: 'Dev Team',
-      uses: '8.2k',
+      id: '3',
+      name: 'Mindfulness Coach',
+      description: 'Stress management, meditation techniques, and mental wellness.',
+      icon: <Brain size={24} color={Colors.light.tint} />,
+      creator: 'Nirvan Team',
+      uses: '15.7k',
       rating: 5.0,
     },
     {
-      id: 'creative-writer',
-      name: 'Creative Writer',
-      description: 'Overcome writer\'s block and craft compelling stories',
-      icon: <Palette size={24} color={Colors.light.tint} />,
-      creator: 'Emma L.',
-      uses: '1.9k',
-      rating: 4.6,
+      id: '4',
+      name: 'Relationship Coach',
+      description: 'Communication skills, conflict resolution, and healthy relationships.',
+      icon: <Heart size={24} color={Colors.light.tint} />,
+      creator: 'Nirvan Team',
+      uses: '8.9k',
+      rating: 4.7,
+    },
+    {
+      id: '5',
+      name: 'Finance Coach',
+      description: 'Budgeting strategies, investment advice, and financial goal setting.',
+      icon: <DollarSign size={24} color={Colors.light.tint} />,
+      creator: 'Nirvan Team',
+      uses: '11.3k',
+      rating: 4.8,
+    },
+    {
+      id: '6',
+      name: 'Productivity Coach',
+      description: 'Time management, goal setting, habit formation, and workflow optimization.',
+      icon: <Activity size={24} color={Colors.light.tint} />,
+      creator: 'Nirvan Team',
+      uses: '14.1k',
+      rating: 4.9,
     },
   ];
 
