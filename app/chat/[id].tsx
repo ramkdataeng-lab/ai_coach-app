@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, TextInput, FlatList, KeyboardAvoidingView, Platform, TouchableOpacity, View, Alert, Share } from 'react-native';
+import { StyleSheet, TextInput, FlatList, KeyboardAvoidingView, Platform, TouchableOpacity, View, Alert, Share, Keyboard } from 'react-native';
 import { useLocalSearchParams, Stack, router } from 'expo-router';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
@@ -19,7 +19,7 @@ type Message = {
     timestamp: Date;
 };
 
-const FREE_MESSAGE_LIMIT = 25;
+const FREE_MESSAGES_PER_COACH = 5; // 5 messages per coach (30 total across 6 coaches)
 
 export default function ChatScreen() {
     const params = useLocalSearchParams<{ id: string, name: string }>();
@@ -38,6 +38,30 @@ export default function ChatScreen() {
     useEffect(() => {
         checkProStatus();
         loadChatHistory();
+
+        // Auto-scroll when keyboard appears
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => {
+                setTimeout(() => {
+                    flatListRef.current?.scrollToEnd({ animated: true });
+                }, 100);
+            }
+        );
+
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => {
+                setTimeout(() => {
+                    flatListRef.current?.scrollToEnd({ animated: true });
+                }, 100);
+            }
+        );
+
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
     }, []);
 
     const loadChatHistory = async () => {
@@ -51,6 +75,11 @@ export default function ChatScreen() {
             }));
             setMessages(loadedMessages);
             setMessageCount(loadedMessages.filter(m => m.sender === 'user').length);
+
+            // Scroll to bottom after loading history
+            setTimeout(() => {
+                flatListRef.current?.scrollToEnd({ animated: false });
+            }, 300);
         }
     };
 
@@ -76,7 +105,7 @@ export default function ChatScreen() {
         setIsSending(true);
 
         // Check limits for free users
-        if (!isPro && messageCount >= FREE_MESSAGE_LIMIT) {
+        if (!isPro && messageCount >= FREE_MESSAGES_PER_COACH) {
             try {
                 const paywallResult = await RevenueCatUI.presentPaywall({
                     displayCloseButton: true,
@@ -105,6 +134,11 @@ export default function ChatScreen() {
         setMessages(prev => [...prev, userMsg]);
         setInputText('');
         setMessageCount(prev => prev + 1);
+
+        // Auto-scroll to show the new user message
+        setTimeout(() => {
+            flatListRef.current?.scrollToEnd({ animated: true });
+        }, 100);
 
         // Save User Message
         PersistenceService.saveMessage(id, { role: 'user', content: userText });
@@ -140,6 +174,11 @@ export default function ChatScreen() {
                 timestamp: new Date(),
             };
             setMessages(prev => [...prev, aiMsg]);
+
+            // Auto-scroll to show the AI response
+            setTimeout(() => {
+                flatListRef.current?.scrollToEnd({ animated: true });
+            }, 100);
 
             // Save AI Message
             PersistenceService.saveMessage(id, { role: 'assistant', content: responseText });
@@ -208,31 +247,34 @@ export default function ChatScreen() {
 
                     {!isPro && (
                         <View style={styles.limitContainer}>
-                            <ThemedText style={styles.limitText}>{FREE_MESSAGE_LIMIT - messageCount} left</ThemedText>
+                            <ThemedText style={styles.limitText}>{FREE_MESSAGES_PER_COACH - messageCount} left</ThemedText>
                         </View>
                     )}
                 </ThemedView>
 
-                <FlatList
-                    ref={flatListRef}
-                    data={messages}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    contentContainerStyle={styles.listContent}
-                    showsVerticalScrollIndicator={false}
-                />
-
                 <KeyboardAvoidingView
+                    style={{ flex: 1 }}
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                    keyboardVerticalOffset={Platform.OS === 'ios' ? 10 : 0}
+                    keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
                 >
+                    <FlatList
+                        ref={flatListRef}
+                        data={messages}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        contentContainerStyle={styles.listContent}
+                        showsVerticalScrollIndicator={false}
+                        onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: true })}
+                        onLayout={() => flatListRef.current?.scrollToEnd({ animated: false })}
+                    />
+
                     <View style={styles.inputContainer}>
                         <TextInput
                             style={[styles.input, {
                                 backgroundColor: '#f1f5f9',
                                 color: Colors.light.text
                             }]}
-                            placeholder={!isPro && messageCount >= FREE_MESSAGE_LIMIT ? "Upgrade to continue..." : "Type a message..."}
+                            placeholder={!isPro && messageCount >= FREE_MESSAGES_PER_COACH ? "Upgrade to continue..." : "Type a message..."}
                             placeholderTextColor="#94a3b8"
                             value={inputText}
                             onChangeText={setInputText}
@@ -244,14 +286,14 @@ export default function ChatScreen() {
                                 }
                             }}
                             multiline
-                            editable={isPro || messageCount < FREE_MESSAGE_LIMIT}
+                            editable={isPro || messageCount < FREE_MESSAGES_PER_COACH}
                         />
                         <TouchableOpacity
                             onPress={handleSendMessage}
                             style={[styles.sendButton, { backgroundColor: Colors.light.tint, opacity: isSending ? 0.5 : 1 }]}
                             disabled={isSending}
                         >
-                            {!isPro && messageCount >= FREE_MESSAGE_LIMIT ? (
+                            {!isPro && messageCount >= FREE_MESSAGES_PER_COACH ? (
                                 <Lock size={20} color="#fff" />
                             ) : (
                                 <Send size={20} color="#fff" />

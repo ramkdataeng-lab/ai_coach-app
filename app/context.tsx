@@ -1,18 +1,33 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, TextInput, View, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Stack } from 'expo-router';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Colors } from '@/constants/Colors';
 import { PersistenceService } from '@/utils/persistence';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ArrowLeft } from 'lucide-react-native';
 
 export default function UserContextScreen() {
     const router = useRouter();
     const [name, setName] = useState('');
     const [values, setValues] = useState('');
     const [focus, setFocus] = useState('');
+
+    // Load saved context when screen opens
+    useEffect(() => {
+        loadSavedContext();
+    }, []);
+
+    const loadSavedContext = async () => {
+        const savedContext = await PersistenceService.getUserContext();
+        if (savedContext) {
+            setName(savedContext.name || '');
+            setValues(savedContext.values || '');
+            setFocus(savedContext.focus || '');
+        }
+    };
 
     const handleSave = async () => {
         // Save context even if empty (allows user to skip)
@@ -29,7 +44,17 @@ export default function UserContextScreen() {
 
     return (
         <ThemedView style={styles.container}>
+            <Stack.Screen options={{ headerShown: false }} />
             <SafeAreaView style={styles.safeArea}>
+                {/* Custom Header with Back Button */}
+                <View style={styles.customHeader}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                        <ArrowLeft size={24} color={Colors.light.text} />
+                    </TouchableOpacity>
+                    <ThemedText style={styles.headerTitle}>context</ThemedText>
+                    <View style={{ width: 40 }} />
+                </View>
+
                 <KeyboardAvoidingView
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                     style={{ flex: 1 }}
@@ -96,6 +121,24 @@ const styles = StyleSheet.create({
     },
     safeArea: {
         flex: 1,
+    },
+    customHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0,0,0,0.05)',
+    },
+    backButton: {
+        padding: 8,
+        width: 40,
+    },
+    headerTitle: {
+        fontSize: 16,
+        fontFamily: 'Inter_500Medium',
+        color: Colors.light.text,
     },
     content: {
         padding: 24,

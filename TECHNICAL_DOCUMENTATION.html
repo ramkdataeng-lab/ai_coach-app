@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirvan - Technical Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #1a1a1a;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            border-bottom: 4px solid #007AFF;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #007AFF;
+            font-size: 2em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .header-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border-left: 4px solid #007AFF;
+        }
+
+        .header-info p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .header-info strong {
+            color: #333;
+        }
+
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: #d4d4d4;
+        }
+
+        .diagram {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 1px solid #dee2e6;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+        }
+
+        ul,
+        ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            color: #28a745;
+            border: none;
+        }
+
+        .toc ol {
+            margin-left: 20px;
+        }
+
+        .toc a {
+            color: #007AFF;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #007AFF;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background: #007AFF;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .flow-step {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-left: 3px solid #007AFF;
+            border-radius: 4px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Nirvan - AI Life Coach</h1>
+        <h2 style="margin-top: 0; color: #555; font-size: 1.8em; border: none; font-weight: 600;">Minimalist AI Coaching
+            in Your Pocket</h2>
+        <h3 style="margin-top: 0; color: #777; font-size: 1.2em; border: none; font-weight: normal;">Technical
+            Documentation</h3>
+
+        <div class="header-info">
+            <p><strong>RevenueCat Shipyard 2026 Submission</strong></p>
+            <p><strong>Developer:</strong> Ramkumar Gudivada</p>
+            <p><strong>Creator Brief:</strong> Simon @BetterCreating</p>
+            <p><strong>Submission Date:</strong> February 10, 2026</p>
+        </div>
+
+        <!-- Simon's Vision -->
+        <div class="info-box"
+            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-left: 4px solid #5a67d8; color: white;">
+            <h3 style="margin-top: 0; color: white;">💡 Simon's Vision</h3>
+            <p style="color: rgba(255,255,255,0.95); line-height: 1.7; margin-bottom: 0;">
+                <em>"Simon's audience loves <strong>productivity, great design, and building systems</strong> — and he
+                    wants to
+                    bring coaching to more people. Create a <strong>clean, minimal mobile app</strong> where users can
+                    browse, create,
+                    and share AI coaches, add personal context/values, and start chatting immediately. <strong>No
+                        complex setup,
+                        just guidance at the right moment.</strong>"</em>
+            </p>
+        </div>
+
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ol>
+                <li><a href="#architecture">High-Level Architecture</a></li>
+                <li><a href="#tech-stack">Technology Stack</a></li>
+                <li><a href="#revenuecat">RevenueCat Integration</a></li>
+                <li><a href="#ai">AI Integration</a></li>
+                <li><a href="#data-flow">Data Flow</a></li>
+                <li><a href="#security">Security & Privacy</a></li>
+                <li><a href="#cicd">CI/CD Pipeline</a></li>
+                <li><a href="#performance">Performance Considerations</a></li>
+            </ol>
+        </div>
+
+        <h2 id="architecture">1. High-Level Architecture</h2>
+
+        <h3>System Overview</h3>
+        <div class="diagram">
+            ┌─────────────────────────────────────────────────────────────┐
+            │ iOS Application (React Native) │
+            │ │
+            │ ┌────────────────────────────────────────────────────┐ │
+            │ │ Presentation Layer │ │
+            │ │ ┌──────────┐ ┌──────────┐ ┌──────────┐ │ │
+            │ │ │ Onboarding│ │ Coach │ │ Paywall │ │ │
+            │ │ │ Screen │ │ Screen │ │ Screen │ │ │
+            │ │ └──────────┘ └──────────┘ └──────────┘ │ │
+            │ │ │ │
+            │ │ Expo Router (File-based Navigation) │ │
+            │ └────────────────────────────────────────────────────┘ │
+            │ │ │
+            │ ┌────────────────────────────────────────────────────┐ │
+            │ │ Business Logic Layer │ │
+            │ │ ┌──────────┐ ┌──────────┐ ┌──────────┐ │ │
+            │ │ │ Chat │ │ Premium │ │ Coach │ │ │
+            │ │ │ Context │ │ Context │ │ Context │ │ │
+            │ │ └──────────┘ └──────────┘ └──────────┘ │ │
+            │ │ │ │
+            │ │ React Context API + State Management │ │
+            │ └────────────────────────────────────────────────────┘ │
+            │ │ │
+            │ ┌────────────────────────────────────────────────────┐ │
+            │ │ Service Layer │ │
+            │ │ ┌──────────┐ ┌──────────┐ ┌──────────┐ │ │
+            │ │ │ AI │ │ RevenueCat│ │ Storage │ │ │
+            │ │ │ Service │ │ Service │ │ Service │ │ │
+            │ │ └────┬─────┘ └────┬──────┘ └────┬─────┘ │ │
+            │ └───────┼─────────────┼──────────────┼───────────────┘ │
+            └──────────┼─────────────┼──────────────┼────────────────────┘
+            │ │ │
+            ▼ ▼ ▼
+            ┌──────────┐ ┌──────────┐ ┌──────────┐
+            │ OpenAI │ │ Apple │ │ Device │
+            │ API │ │ App Store│ │ Storage │
+            │ GPT-4 │ │ IAP │ │AsyncStore│
+            └──────────┘ └──────────┘ └──────────┘
+        </div>
+
+        <h3>Component Architecture</h3>
+        <p><strong>App Structure:</strong></p>
+        <pre><code>app/
+├── (tabs)/              # Main tab navigation
+│   ├── index.tsx        # Home/Coach Selection
+│   ├── chat.tsx         # Chat Interface
+│   └── settings.tsx     # Settings & Account
+├── _layout.tsx          # Root layout with providers
+├── onboarding.tsx       # First-time user flow
+└── paywall.tsx          # Subscription screen
+
+components/
+├── CoachCard.tsx        # Coach selection cards
+├── ChatBubble.tsx       # Message display
+├── PremiumBanner.tsx    # Upgrade prompts
+└── LoadingSpinner.tsx   # Loading states
+
+contexts/
+├── ChatContext.tsx      # Chat state management
+├── PremiumContext.tsx   # Subscription state
+└── CoachContext.tsx     # Active coach tracking
+
+utils/
+├── ai-service.ts        # OpenAI integration
+├── revenuecat.ts        # RevenueCat SDK wrapper
+└── storage.ts           # AsyncStorage helpers</code></pre>
+
+        <h2 id="tech-stack">2. Technology Stack</h2>
+
+        <h3>Frontend Framework</h3>
+        <ul>
+            <li><strong>React Native:</strong> v0.74.5</li>
+            <li><strong>Expo SDK:</strong> v51</li>
+            <li><strong>Expo Router:</strong> v3 (file-based routing)</li>
+            <li><strong>TypeScript:</strong> Type-safe development</li>
+        </ul>
+
+        <h3>UI/UX - Minimalist Design Philosophy</h3>
+        <div class="success-box">
+            <h4 style="margin-top: 0;">Design Principles:</h4>
+            <ul style="margin-bottom: 0;">
+                <li><strong>Zero Friction:</strong> No complex onboarding, no account creation barriers—just open and
+                    start chatting</li>
+                <li><strong>Clean Typography:</strong> System fonts optimized for readability and iOS native feel</li>
+                <li><strong>Thoughtful Spacing:</strong> Generous whitespace and padding for a premium, uncluttered
+                    experience</li>
+                <li><strong>Smooth Animations:</strong> React Native Reanimated for 60fps transitions and
+                    micro-interactions</li>
+                <li><strong>Instant Feedback:</strong> Loading states, haptics, and visual cues at every interaction
+                </li>
+            </ul>
+        </div>
+        <ul>
+            <li><strong>React Native StyleSheet:</strong> Native styling with custom design system</li>
+            <li><strong>Expo Vector Icons:</strong> Minimal, consistent iconography</li>
+            <li><strong>React Native Reanimated:</strong> Smooth 60fps animations</li>
+            <li><strong>Expo Status Bar:</strong> Adaptive status bar styling</li>
+            <li><strong>Custom Components:</strong> Reusable, composable UI elements</li>
+        </ul>
+
+        <h3>Backend Services</h3>
+        <ul>
+            <li><strong>OpenAI API:</strong> GPT-4 for AI conversations</li>
+            <li><strong>RevenueCat SDK:</strong> Subscription management</li>
+            <li><strong>AsyncStorage:</strong> Local data persistence</li>
+        </ul>
+
+        <h3>Development Tools</h3>
+        <ul>
+            <li><strong>GitHub Actions:</strong> CI/CD automation</li>
+            <li><strong>EAS Build:</strong> Cloud-based iOS builds</li>
+            <li><strong>EAS Submit:</strong> Automated TestFlight deployment</li>
+            <li><strong>Expo Dev Client:</strong> Development builds</li>
+        </ul>
+
+        <h2 id="revenuecat">3. RevenueCat Integration</h2>
+
+        <div class="success-box">
+            <h3 style="margin-top: 0;">Configuration</h3>
+            <p><strong>API Key:</strong> <code>appl_ooxzpzwxHOQNkUCjODAkqnLDbjJ</code></p>
+            <p><strong>Entitlement ID:</strong> <code>premium</code></p>
+            <p><strong>Bundle ID:</strong> <code>com.ramkumar.gudivada.nirvanaicoachv2</code></p>
+        </div>
+
+        <h3>Products Configuration</h3>
+
+        <h4>App Store Connect Products</h4>
+        <table>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Product ID</td>
+                <td><code>monthly_premium</code></td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>Auto-Renewable Subscription</td>
+            </tr>
+            <tr>
+                <td>Duration</td>
+                <td>1 Month</td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>$9.99 USD</td>
+            </tr>
+            <tr>
+                <td>Subscription Group</td>
+                <td>Premium Subscriptions</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>Ready to Submit</td>
+            </tr>
+        </table>
+
+        <h4>RevenueCat Offerings</h4>
+        <pre><code>Offering ID: default (Current)
+Packages:
+  - $rc_monthly → monthly_premium
+  - $rc_annual → yearly_premium (future)
+  - $rc_lifetime → lifetime_premium (future)</code></pre>
+
+        <h3>Implementation Details</h3>
+
+        <h4>1. SDK Initialization</h4>
+        <pre><code>// utils/revenuecat.ts
+import Purchases from 'react-native-purchases';
+
+const API_KEYS = {
+    ios: 'appl_ooxzpzwxHOQNkUCjODAkqnLDbjJ',
+    android: 'goog_YOUR_KEY_HERE',
+};
+
+export class RevenueCatService {
+    static async init() {
+        // Safety check for Expo Go
+        if (Constants.executionEnvironment === 'storeClient') {
+            console.log('[RevenueCat] Running in Expo Go - Mock Mode');
+            this.mockPro = true;
+            return;
+        }
+
+        try {
+            if (Platform.OS === 'ios') {
+                await Purchases.configure({ apiKey: API_KEYS.ios });
+            }
+            if (__DEV__) {
+                await Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
+            }
+            console.log('RevenueCat Initialized');
+        } catch (e) {
+            console.warn('RevenueCat Init Failed:', e);
+        }
+    }
+}</code></pre>
+
+        <h4>2. Purchase Flow</h4>
+        <pre><code>static async purchasePackage(pkg: PurchasesPackage) {
+    try {
+        const { customerInfo } = await Purchases.purchasePackage(pkg);
+        return { success: true, customerInfo };
+    } catch (e: any) {
+        if (!e.userCancelled) {
+            console.error('Purchase error', e);
+            return { success: false, error: e.message };
+        } else {
+            return { success: false, userCancelled: true };
+        }
+    }
+}</code></pre>
+
+        <h4>3. Checking Premium Status</h4>
+        <pre><code>static async isPro(): Promise&lt;boolean&gt; {
+    if (this.mockPro) return true; // Mock for testing
+
+    try {
+        const customerInfo = await this.getCustomerInfo();
+        return customerInfo?.entitlements.active['premium'] !== undefined;
+    } catch (e) {
+        console.error("Failed to check pro status", e);
+        return false;
+    }
+}</code></pre>
+
+        <h3>Monetization Flow</h3>
+        <div class="info-box">
+            <h4 style="margin-top: 0;">User Journey:</h4>
+            <div class="flow-step">1. App Launch → RevenueCat.init()</div>
+            <div class="flow-step">2. User selects coach → Check isPro()</div>
+            <div class="flow-step">3. Free tier: 5 messages per coach</div>
+            <div class="flow-step">4. Message limit reached → Show paywall</div>
+            <div class="flow-step">5. User taps "Upgrade" → getOfferings()</div>
+            <div class="flow-step">6. Display packages → User selects plan</div>
+            <div class="flow-step">7. Tap "Subscribe" → purchasePackage()</div>
+            <div class="flow-step">8. Apple processes payment</div>
+            <div class="flow-step">9. RevenueCat validates receipt</div>
+            <div class="flow-step">10. Premium entitlement granted</div>
+            <div class="flow-step">11. User gets unlimited access</div>
+        </div>
+
+        <h2 id="ai">4. AI Integration</h2>
+
+        <div class="info-box">
+            <p><strong>Model:</strong> GPT-4</p>
+            <p><strong>API Version:</strong> v1</p>
+            <p><strong>Max Tokens:</strong> 500 per response</p>
+            <p><strong>Temperature:</strong> 0.7 (balanced creativity)</p>
+        </div>
+
+        <h3>Implementation</h3>
+        <pre><code>// utils/ai-service.ts
+import OpenAI from 'openai';
+
+const OPENAI_API_KEY = process.env.EXPO_PUBLIC_OPENAI_API_KEY || '';
+
+const openai = new OpenAI({
+    apiKey: OPENAI_API_KEY,
+});
+
+export async function sendMessage(
+    coachType: string,
+    messages: Message[]
+): Promise&lt;string&gt; {
+    try {
+        const systemPrompt = getCoachSystemPrompt(coachType);
+        
+        const completion = await openai.chat.completions.create({
+            model: 'gpt-4',
+            messages: [
+                { role: 'system', content: systemPrompt },
+                ...messages.map(m => ({
+                    role: m.role,
+                    content: m.content
+                }))
+            ],
+            max_tokens: 500,
+            temperature: 0.7,
+        });
+
+        return completion.choices[0].message.content || 'No response';
+    } catch (error) {
+        console.error('OpenAI API Error:', error);
+        throw error;
+    }
+}</code></pre>
+
+        <h3>Coach Personas</h3>
+        <p>Each coach has a specialized system prompt:</p>
+
+        <table>
+            <tr>
+                <th>Coach</th>
+                <th>Specialization</th>
+            </tr>
+            <tr>
+                <td><strong>Fitness Coach</strong></td>
+                <td>Certified personal trainer and nutritionist providing evidence-based fitness advice, workout plans,
+                    and nutrition guidance</td>
+            </tr>
+            <tr>
+                <td><strong>Career Coach</strong></td>
+                <td>Experienced career counselor specializing in tech careers, resume writing, interview prep, and
+                    salary negotiation</td>
+            </tr>
+            <tr>
+                <td><strong>Mindfulness Coach</strong></td>
+                <td>Meditation instructor and stress management expert guiding mindfulness practices and mental wellness
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Relationship Coach</strong></td>
+                <td>Licensed relationship therapist providing advice on communication, conflict resolution, and healthy
+                    relationships</td>
+            </tr>
+            <tr>
+                <td><strong>Finance Coach</strong></td>
+                <td>Certified financial planner helping with budgeting, saving, investing, and financial goal setting
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Productivity Coach</strong></td>
+                <td>Productivity expert specializing in time management, workflow optimization, and habit building</td>
+            </tr>
+        </table>
+
+        <h2 id="data-flow">5. Data Flow</h2>
+
+        <h3>Chat Message Flow</h3>
+        <div class="diagram">
+            User Types Message
+            ↓
+            Check Message Count
+            ↓
+            [Limit Reached] → Show Paywall
+            [Within Limit] → Continue
+            ↓
+            Send to OpenAI API
+            ↓
+            Receive AI Response
+            ↓
+            Save to AsyncStorage
+            ↓
+            Update UI
+            ↓
+            Increment Message Count
+        </div>
+
+        <h3>Purchase Flow</h3>
+        <div class="diagram">
+            User Taps "Upgrade"
+            ↓
+            Fetch Offerings from RevenueCat
+            ↓
+            Display Packages
+            ↓
+            User Selects Package
+            ↓
+            Initiate Purchase
+            ↓
+            Apple Processes Payment
+            ↓
+            RevenueCat Validates Receipt
+            ↓
+            Grant Premium Entitlement
+            ↓
+            Update App State
+            ↓
+            Unlock All Features
+        </div>
+
+        <h2 id="security">6. Security & Privacy</h2>
+
+        <h3>API Key Management</h3>
+        <div class="warning-box">
+            <h4 style="margin-top: 0;">OpenAI API Key:</h4>
+            <ul>
+                <li>Stored in environment variable: <code>EXPO_PUBLIC_OPENAI_API_KEY</code></li>
+                <li>Configured in GitHub Secrets for CI/CD</li>
+                <li>Never committed to version control</li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            <h4 style="margin-top: 0;">RevenueCat API Key:</h4>
+            <ul>
+                <li>Public iOS key (safe to expose): <code>appl_ooxzpzwxHOQNkUCjODAkqnLDbjJ</code></li>
+                <li>Configured in app code</li>
+                <li>Backend validation handled by RevenueCat servers</li>
+            </ul>
+        </div>
+
+        <h3>Privacy Principles</h3>
+        <ul>
+            <li>No user data sent to external servers (except OpenAI for chat)</li>
+            <li>No analytics tracking</li>
+            <li>No data sharing with third parties</li>
+            <li>Conversations stored locally only</li>
+        </ul>
+
+        <h2 id="cicd">7. CI/CD Pipeline</h2>
+
+        <h3>GitHub Actions Workflow</h3>
+        <p><strong>Trigger:</strong> Manual workflow dispatch</p>
+        <p><strong>Runner:</strong> macOS-latest</p>
+        <p><strong>Build Time:</strong> ~24 minutes</p>
+
+        <pre><code>name: Build iOS App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build iOS App
+        run: eas build --platform ios --profile production
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          EXPO_PUBLIC_OPENAI_API_KEY: ${{ secrets.EXPO_PUBLIC_OPENAI_API_KEY }}
+
+      - name: Submit to TestFlight
+        run: eas submit --platform ios --profile production
+        env:
+          EXPO_APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.EXPO_APPLE_APP_SPECIFIC_PASSWORD }}</code></pre>
+
+        <h2 id="performance">8. Performance Considerations</h2>
+
+        <h3>Optimization Strategies</h3>
+        <ul>
+            <li><strong>Lazy Loading:</strong> Components loaded on-demand, images optimized</li>
+            <li><strong>Caching:</strong> Chat history and API responses cached</li>
+            <li><strong>Memory Management:</strong> Chat history limited to last 50 messages</li>
+            <li><strong>Network Optimization:</strong> Debounced API calls, retry logic</li>
+        </ul>
+
+        <h3>Target Metrics</h3>
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Target</th>
+            </tr>
+            <tr>
+                <td>App launch time</td>
+                <td>&lt; 2 seconds</td>
+            </tr>
+            <tr>
+                <td>Chat response time</td>
+                <td>&lt; 3 seconds</td>
+            </tr>
+            <tr>
+                <td>Purchase flow</td>
+                <td>&lt; 5 seconds</td>
+            </tr>
+            <tr>
+                <td>Memory usage</td>
+                <td>&lt; 150 MB</td>
+            </tr>
+        </table>
+
+        <h2>Future Enhancements</h2>
+
+        <h3>Phase 1 (Next 30 Days)</h3>
+        <ul>
+            <li>Voice input/output integration</li>
+            <li>Goal tracking dashboard</li>
+            <li>Daily check-in notifications</li>
+            <li>Offline mode support</li>
+        </ul>
+
+        <h3>Phase 2 (60-90 Days)</h3>
+        <ul>
+            <li>Custom coach creation</li>
+            <li>Apple Health integration</li>
+            <li>Group coaching features</li>
+            <li>Multi-language support</li>
+        </ul>
+
+        <h3>Phase 3 (6 Months)</h3>
+        <ul>
+            <li>Multi-modal AI (image analysis)</li>
+            <li>Collaborative coaching sessions</li>
+            <li>Creator partnerships</li>
+            <li>Web app version</li>
+        </ul>
+
+        <div class="footer">
+            <p><strong>Document Version:</strong> 1.0</p>
+            <p><strong>Last Updated:</strong> February 10, 2026</p>
+            <p><strong>Contact:</strong> ramkumar.gudivada@gmail.com</p>
+        </div>
+    </div>
+</body>
+
+</html>
