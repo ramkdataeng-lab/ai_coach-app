@@ -17,6 +17,12 @@ export const AI_SYSTEM_PROMPTS = {
 const OPENAI_API_KEY = process.env.EXPO_PUBLIC_OPENAI_API_KEY || '';
 
 export const generateAIResponse = async (history: AIMessage[], coachType: string = 'default'): Promise<string> => {
+    // Check for Consent FIRST
+    const hasConsented = await PersistenceService.getAIConsent();
+    if (!hasConsented) {
+        throw new Error("AI Consent not granted. Please accept the privacy policy to continue.");
+    }
+
     // Retrieve User Context
     const userContext = await PersistenceService.getUserContext();
 

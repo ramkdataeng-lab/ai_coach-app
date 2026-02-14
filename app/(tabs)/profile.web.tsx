@@ -35,20 +35,7 @@ export default function ProfileScreen() {
         Alert.alert("Web Platform", "Restore Purchases is not supported on the web.");
     }
 
-    const [debugTaps, setDebugTaps] = useState(0);
 
-    const handleDebugTap = () => {
-        const newCount = debugTaps + 1;
-        setDebugTaps(newCount);
-
-        if (newCount === 5 && isDev) {
-            console.log('✅ Unlocking Pro features (Web)!');
-            RevenueCatService.setMockPro(true);
-            setIsPro(true);
-            Alert.alert("🎉 Debug Mode", "Pro Features Unlocked for Demo (Web)!");
-            setDebugTaps(0);
-        }
-    };
 
     return (
         <ThemedView style={styles.container}>
@@ -57,8 +44,7 @@ export default function ProfileScreen() {
                     <View style={styles.headerContent}>
                         <View style={{ flex: 1 }}>
                             <TouchableOpacity
-                                activeOpacity={0.7}
-                                onPress={handleDebugTap}
+                                activeOpacity={1}
                             >
                                 <ThemedText type="title" style={{ fontFamily: 'Outfit_700Bold' }}>Profile</ThemedText>
                             </TouchableOpacity>

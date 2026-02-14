@@ -89,24 +89,7 @@ export default function ProfileScreen() {
         }
     }
 
-    const [debugTaps, setDebugTaps] = useState(0);
 
-    const handleDebugTap = () => {
-        const newCount = debugTaps + 1;
-        console.log(`🔍 Debug tap: ${newCount}/5`);
-        setDebugTaps(newCount);
-
-        if (newCount === 5 && isDev) {
-            console.log('✅ Unlocking Pro features!');
-            RevenueCatService.setMockPro(true);
-            setIsPro(true);
-            Alert.alert("🎉 Debug Mode", "Pro Features Unlocked for Demo!\n\nYou now have unlimited messages.");
-            setDebugTaps(0); // Reset counter
-        } else if (newCount >= 3 && isDev) {
-            // Visual feedback when close
-            console.log(`💡 ${5 - newCount} more taps to unlock Pro`);
-        }
-    };
 
     return (
         <ThemedView style={styles.container}>
@@ -115,9 +98,7 @@ export default function ProfileScreen() {
                     <AppHeader>
                         <View style={{ flex: 1 }}>
                             <TouchableOpacity
-                                activeOpacity={0.7}
-                                onPress={handleDebugTap}
-                                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                                activeOpacity={1}
                             >
                                 <ThemedText type="title" style={{ fontFamily: 'Outfit_700Bold' }}>Profile</ThemedText>
                             </TouchableOpacity>

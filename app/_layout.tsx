@@ -13,6 +13,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Colors } from '@/constants/Colors';
 import { RevenueCatService } from '@/utils/revenuecat';
+import { ConsentModal } from '@/components/consent-modal';
 
 // Prevent splash screen from hiding until fonts are loaded
 SplashScreen.preventAutoHideAsync();
@@ -60,6 +61,7 @@ export default function RootLayout() {
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="dark" />
+        <ConsentModal />
       </ThemeProvider>
     </GestureHandlerRootView>
   );

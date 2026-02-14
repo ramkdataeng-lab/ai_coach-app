@@ -12,7 +12,8 @@ export interface ChatSession {
 const STORAGE_KEYS = {
     CHATS: 'nirvan_chats_v1',
     PREFS: 'nirvan_prefs_v1',
-    COACHES: 'nirvan_coaches_v1'
+    COACHES: 'nirvan_coaches_v1',
+    AI_CONSENT: 'nirvan_ai_consent_v1'
 };
 
 export interface Coach {
@@ -142,6 +143,24 @@ export class PersistenceService {
             return json != null ? JSON.parse(json) : null;
         } catch (e) {
             return null;
+        }
+    }
+
+    // AI Consent Management
+    static async setAIConsent(accepted: boolean) {
+        try {
+            await storage.setItem(STORAGE_KEYS.AI_CONSENT, JSON.stringify(accepted));
+        } catch (e) {
+            console.error('Failed to save AI consent', e);
+        }
+    }
+
+    static async getAIConsent(): Promise<boolean> {
+        try {
+            const json = await storage.getItem(STORAGE_KEYS.AI_CONSENT);
+            return json != null ? JSON.parse(json) : false;
+        } catch (e) {
+            return false;
         }
     }
 
