@@ -8,6 +8,8 @@
 
 Whether you need a tough-love fitness instructor, a minimalist chef, or a compassionate therapist, Nirvan has a coach for you.
 
+🌐 **Try the Web Experience:** [Nirvan AI Coach](https://nirvan-ai-coach.vercel.app/)
+
 ---
 
 ## 🚀 Key Features
