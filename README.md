@@ -1,50 +1,98 @@
-# Welcome to your Expo app 👋
+# Nirvan - Your AI Life Coach 🧘‍♂️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+![Nirvan Banner](./public/Nirvan-ai/assets/logo.jpg)
 
-## Get started
+> **RevenueCat Shipyard 2026 Hackathon Submission**
 
-1. Install dependencies
+**Nirvan** is an advanced AI coaching platform designed to democratize access to personal development. Unlike generic chatbots, Nirvan offers specialized "Persona Coaches" that understand your unique context, goals, and history.
 
-   ```bash
-   npm install
-   ```
+Whether you need a tough-love fitness instructor, a minimalist chef, or a compassionate therapist, Nirvan has a coach for you.
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🚀 Key Features
 
-In the output, you'll find options to open the app in a
+### 🧠 specialized Persona Coaches
+Choose from 6 pre-built expert personas, each with a unique voice and expertise:
+*   **Life Strategist:** Holistic life planning and goal setting.
+*   **Fitness Drill Sergeant:** No-nonsense workout and health advice.
+*   **Zen Master:** Mindfulness, stress reduction, and philosophy.
+*   **Financial Advisor:** Budgeting, investing, and wealth management.
+*   **Relationship Counselor:** Navigating social and romantic dynamics.
+*   **Career Mentor:** Professional growth and workplace navigation.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### ✨ Create Your Own Coach
+Don't see what you need? Use our **AI Coach Crafter** to generate a custom coach in seconds. Just describe the persona (e.g., "A sarcastic Python tutor"), and Nirvan will generate the system prompt and icon automatically.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 📝 Context-Aware Engine
+Nirvan doesn't just chat; it *remembers*. The **Personal Context Engine** allows you to store key facts about your life (e.g., "I'm vegetarian," "I'm training for a marathon") which every coach automatically respects.
 
-## Get a fresh project
+### 🔒 Privacy First
+Your data belongs to you. Conversations and personal context are stored locally on your device. We never use your data to train public AI models.
 
-When you're ready, run:
+### 💎 Premium Experience (RevenueCat Integration)
+*   **Freemium Model:** Users get limited daily interactions.
+*   **Nirvan Pro:** Unlocks unlimited messages, all coach personas, and advanced GPT-4 models.
+*   **Powered by RevenueCat:** Seamless cross-platform subscription management.
 
-```bash
-npm run reset-project
-```
+---
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🛠️ Tech Stack
 
-## Learn more
+*   **Framework:** [React Native](https://reactnative.dev/) (via [Expo](https://expo.dev/))
+*   **Language:** TypeScript
+*   **AI Engine:** OpenAI GPT-4 Turbo
+*   **Monetization:** [RevenueCat](https://www.revenuecat.com/) (Subscription Management)
+*   **Navigation:** Expo Router
+*   **Storage:** AsyncStorage (Local Presistence)
 
-To learn more about developing your project with Expo, look at the following resources:
+---
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 📸 Screenshots
 
-## Join the community
+| Home Screen | Chat Interface | Coach Library | Profile |
+|:---:|:---:|:---:|:---:|
+| <img src="./path/to/screenshot1.png" width="200" /> | <img src="./path/to/screenshot2.png" width="200" /> | <img src="./path/to/screenshot3.png" width="200" /> | <img src="./path/to/screenshot4.png" width="200" /> |
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🏁 Getting Started
+
+### Prerequisites
+*   Node.js (v18+)
+*   RevenueCat API Keys (Public)
+*   OpenAI API Key
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/ramkdataeng-lab/ai_coach-app.git
+    cd ai_coach-app
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment**
+    Create a `.env` file in the root directory:
+    ```env
+    EXPO_PUBLIC_OPENAI_API_KEY=your_openai_key_here
+    ```
+
+4.  **Run the App**
+    ```bash
+    npx expo start
+    ```
+
+---
+
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgements
+*   Built for the **RevenueCat Shipyard** Hackathon.
+*   Icons by [Lucide React Native](https://lucide.dev/).
+*   Fonts by [Google Fonts](https://fonts.google.com/) (Outfit & Inter).
