@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as WebBrowser from 'expo-web-browser';
 import { Modal, StyleSheet, TouchableOpacity, Linking, Platform, View, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -32,9 +33,13 @@ export function ConsentModal({ onConsent }: ConsentModalProps) {
         if (onConsent) onConsent();
     };
 
-    const openPrivacyPolicy = () => {
+    const openPrivacyPolicy = async () => {
         // Link to the privacy policy hosted or within the app
-        Linking.openURL('https://nirvan-ai-coach-v2.vercel.app/Nirvan-ai/PRIVACY_POLICY.html'); // Update with actual URL if known, or local file
+        try {
+            await WebBrowser.openBrowserAsync('https://nirvan-ai-coach.vercel.app/PRIVACY_POLICY.html');
+        } catch (e) {
+            // Should handle error or just ignore
+        }
     };
 
     if (loading && !visible) return null;

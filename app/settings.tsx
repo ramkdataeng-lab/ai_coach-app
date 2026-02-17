@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Switch, TouchableOpacity, Alert, ScrollView, Platform, View } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
+import { StyleSheet, Switch, TouchableOpacity, Alert, ScrollView, Platform, View, Linking } from 'react-native';
 import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/Colors';
@@ -95,12 +96,24 @@ export default function SettingsScreen() {
                     <ThemedView style={styles.section}>
                         <ThemedText style={styles.sectionTitle}>Support</ThemedText>
 
-                        <TouchableOpacity style={styles.linkRow}>
+                        <TouchableOpacity style={styles.linkRow} onPress={async () => {
+                            try {
+                                await WebBrowser.openBrowserAsync('https://nirvan-ai-coach.vercel.app/PRIVACY_POLICY.html');
+                            } catch (e) {
+                                Alert.alert('Error', 'Could not open Privacy Policy. Please try again later.');
+                            }
+                        }}>
                             <FileText size={20} color={Colors.light.text} />
                             <ThemedText style={styles.linkText}>Privacy Policy</ThemedText>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.linkRow}>
+                        <TouchableOpacity style={styles.linkRow} onPress={async () => {
+                            try {
+                                await WebBrowser.openBrowserAsync('https://www.apple.com/legal/internet-services/itunes/dev/stdeula/');
+                            } catch (e) {
+                                Alert.alert('Error', 'Could not open Terms of Service. Please try again later.');
+                            }
+                        }}>
                             <Info size={20} color={Colors.light.text} />
                             <ThemedText style={styles.linkText}>Terms of Service</ThemedText>
                         </TouchableOpacity>
